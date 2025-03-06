@@ -3,6 +3,7 @@ package tn.esprit.tpfoyerr.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.Date;
@@ -66,8 +67,15 @@ public class Reservation {
     @ManyToMany
     private Set<Etudiant> etudiants;
 
+    @ManyToOne
+    private Chambre chambre;
 
 
+    public Chambre getChambre() {
+        return chambre;
+    }
 
-
+    public void setChambre(Chambre chambre) {
+        this.chambre = chambre;
+    }
 }

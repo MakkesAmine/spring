@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyerr.entity.Bloc;
 import tn.esprit.tpfoyerr.entity.Chambre;
 import tn.esprit.tpfoyerr.entity.Foyer;
 import tn.esprit.tpfoyerr.service.IChambreService;
@@ -44,11 +45,18 @@ public class FoyerRestController {
         return foyer;
     }
 
-
-
     @PutMapping("/assign-bloc-to-foyer/{foyerId}/{blocId}")
     public void assignBlocToFoyer(@PathVariable Long foyerId,
                                   @PathVariable Long blocId) {
         foyerService.assignBlocToFoyer(foyerId, blocId);
+    }
+    @PutMapping("/unassign-bloc-from-foyer/{blocId}")
+    public void unassignBlocFromFoyer(@PathVariable Long blocId) {
+        foyerService.unassignBlocFromFoyer(blocId);
+    }
+
+    @PostMapping("/create-bloc-and-foyer")
+    public Foyer createBlocAndFoyer(@RequestBody Foyer foyer, @RequestBody Bloc bloc) {
+        return foyerService.createBlocAndFoyer(foyer, bloc);
     }
 }

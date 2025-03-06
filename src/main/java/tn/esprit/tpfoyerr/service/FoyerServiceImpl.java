@@ -56,4 +56,28 @@ public class FoyerServiceImpl implements IFoyerService{
         blocRepository.save(bloc);
         foyerRepository.save(foyer);
     }
+
+    @Override
+    @Transactional
+    public void unassignBlocFromFoyer(Long blocId) {
+        Bloc bloc = blocRepository.findById(blocId)
+                .orElseThrow(() -> new RuntimeException("Bloc non trouvé"));
+        Foyer foyer = bloc.getFoyer();
+        if (foyer != null) {
+            foyer.getBlocs().remove(bloc);
+            bloc.setFoyer(null);
+            blocRepository.save(bloc);
+            foyerRepository.save(foyer);
+        }
+    }
+
+    @Override
+    @Transactional
+    public Foyer createBlocAndFoyer(Foyer foyer, Bloc bloc) {
+        foyer.getBlocs().add(bloc);
+        bloc.setFoyer(foyer);
+        foyerRepository.save(foyer);
+        blocRepository.save(bloc);
+        return foyer;
+    }
 }

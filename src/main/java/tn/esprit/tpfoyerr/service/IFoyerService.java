@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyerr.service;
 
+import tn.esprit.tpfoyerr.entity.Bloc;
 import tn.esprit.tpfoyerr.entity.Chambre;
 import tn.esprit.tpfoyerr.entity.Foyer;
 
@@ -13,5 +14,6 @@ public interface IFoyerService {
     public void removeFoyer(Long foyerId);
     public Foyer modifyFoyer(Foyer foyerId) ;
     void assignBlocToFoyer(Long foyerId, Long blocId);
-
+    void unassignBlocFromFoyer(Long blocId);
+    Foyer createBlocAndFoyer(Foyer foyer, Bloc bloc);
 }

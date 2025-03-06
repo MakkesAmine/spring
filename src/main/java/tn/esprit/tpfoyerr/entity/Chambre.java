@@ -19,7 +19,7 @@ public class Chambre {
     @ManyToOne
     private Bloc bloc;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 
     public Chambre(long idChambre, long numeroChambre, TypeChambre typeC, Bloc bloc, Set<Reservation> reservations) {
@@ -48,6 +48,7 @@ public class Chambre {
     public Bloc getBloc() {
         return bloc;
     }
+
 
     public Set<Reservation> getReservations() {
         return reservations;
